@@ -1,0 +1,29 @@
+<header class="header">
+  <div class="header__container">
+    <div class="header__logo"></div>
+    <div class="header__items">
+      <app-user-dropdown
+        *ngIf="isLoggedIn"
+        class="header__item header__item--dropdown"
+        [userName]="username"
+      ></app-user-dropdown>
+      <button
+        mat-button
+        *ngIf="!isLoggedIn"
+        routerLink="login"
+        class="header__item"
+      >
+        Login
+      </button>
+
+      <button
+        mat-button
+        *ngIf="!isLoggedIn"
+        routerLink="register"
+        class="header__item"
+      >
+        Register
+      </button>
+    </div>
+  </div>
+</header>
