@@ -1,1 +1,130 @@
-<p>register works!</p>
+<div class="register">
+  <div class="register__container">
+    <h1 class="register__header">Create your profile</h1>
+    <mat-card class="register__card">
+      <mat-card-content class="register__content">
+        <form [formGroup]="registerForm" class="register__form">
+          <div class="register__input">
+            <mat-form-field class="register__full-width" appearance="fill">
+              <mat-label [style.backgroundColor]="'$accent'"
+                >First Name</mat-label
+              >
+              <input
+                formControlName="firstName"
+                type="text"
+                matInput
+                value=""
+                autocomplete="off"
+              />
+            </mat-form-field>
+            <!-- <app-errors [control]="getControl('firstName')"></app-errors> -->
+          </div>
+
+          <div class="register__input">
+            <mat-form-field class="register__full-width" appearance="fill">
+              <mat-label [style.backgroundColor]="'$accent'"
+                >Last Name</mat-label
+              >
+              <input
+                formControlName="lastName"
+                autocomplete="off"
+                type="text"
+                matInput
+                value=""
+              />
+            </mat-form-field>
+            <!-- <app-errors [control]="getControl('lastName')"></app-errors> -->
+          </div>
+
+          <div class="register__input">
+            <mat-form-field class="register__full-width" appearance="fill">
+              <mat-label [style.backgroundColor]="'$accent'"
+                >Username</mat-label
+              >
+              <input
+                formControlName="username"
+                autocomplete="off"
+                type="text"
+                matInput
+                value=""
+              />
+            </mat-form-field>
+            <!-- <app-errors [control]="getControl('username')"></app-errors> -->
+          </div>
+
+          <div class="register__input">
+            <mat-form-field class="register__full-width" appearance="fill">
+              <mat-label [style.backgroundColor]="'$accent'">Email</mat-label>
+              <input
+                formControlName="email"
+                autocomplete="off"
+                type="email"
+                matInput
+                value=""
+              />
+            </mat-form-field>
+            <!-- <app-errors [control]="getControl('email')"></app-errors> -->
+          </div>
+
+          <div class="register__input">
+            <mat-form-field class="register__full-width" appearance="fill">
+              <mat-label>Password</mat-label>
+              <input
+                formControlName="password"
+                [type]="visiblePassword ? 'text' : 'password'"
+                matInput
+                value=""
+                autocomplete="off"
+              />
+            </mat-form-field>
+            <div class="register__icon" (click)="toggleVisibility('password')">
+              <mat-icon>{{
+                visiblePassword ? "visibility" : "visibility_off"
+              }}</mat-icon>
+            </div>
+            <!-- <app-errors [control]="getControl('password')"></app-errors> -->
+          </div>
+
+          <div class="register__input">
+            <mat-form-field class="register__full-width" appearance="fill">
+              <mat-label>Confirm Password</mat-label>
+              <input
+                formControlName="confirmPassword"
+                [type]="visibleConfirm ? 'text' : 'password'"
+                matInput
+                autocomplete="off"
+                value=""
+              />
+            </mat-form-field>
+            <div
+              class="register__icon"
+              (click)="toggleVisibility('confirmPassword')"
+            >
+              <mat-icon>{{
+                visibleConfirm ? "visibility" : "visibility_off"
+              }}</mat-icon>
+            </div>
+            <!-- <app-errors [control]="getControl('confirmPassword')"></app-errors> -->
+          </div>
+        </form>
+        <button
+          [disabled]="registerForm.invalid"
+          class="register__button"
+          mat-raised-button
+          color="primary"
+          type="submit"
+          (click)="onSubmit()"
+        >
+          <div class="register__button-content">
+            <!-- <app-load-spinner *ngIf="loading"></app-load-spinner> -->
+            <span> Register</span>
+          </div>
+        </button>
+        <div class="register__contact">
+          Already a member?
+          <a class="register__link" routerLink="/auth/login">Login</a>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>

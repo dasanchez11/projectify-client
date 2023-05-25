@@ -1,4 +1,5 @@
 @import "variables";
+
 .header {
   width: 100vw;
   height: $header-height;
@@ -6,8 +7,10 @@
   color: $accent;
 
   &__container {
+    margin: 0 auto;
+    padding: 0 1rem;
     height: $header-height;
-    max-width: 87rem;
+    max-width: $max-width;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -28,6 +31,7 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    color: white;
 
     &:hover {
       background-color: $primary-800;

@@ -1,6 +1,6 @@
 <header class="header">
   <div class="header__container">
-    <div class="header__logo"></div>
+    <div class="header__logo">PROJECTIFY</div>
     <div class="header__items">
       <app-user-dropdown
         *ngIf="isLoggedIn"
@@ -9,8 +9,9 @@
       ></app-user-dropdown>
       <button
         mat-button
+        color="accent"
         *ngIf="!isLoggedIn"
-        routerLink="login"
+        routerLink="/auth/login"
         class="header__item"
       >
         Login
@@ -18,8 +19,9 @@
 
       <button
         mat-button
+        color="accent"
         *ngIf="!isLoggedIn"
-        routerLink="register"
+        routerLink="/auth/register"
         class="header__item"
       >
         Register

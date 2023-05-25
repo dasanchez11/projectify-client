@@ -1,0 +1,44 @@
+@import "variables";
+
+.user-dropdown {
+  &__image {
+    width: 2rem;
+    height: 2rem;
+    background-color: $warn-light;
+    border-radius: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border: none;
+  }
+
+  &__name {
+    font-weight: bolder;
+    color: $primary-900;
+  }
+
+  &__option {
+    display: flex;
+    flex-direction: row;
+    gap: 0.5rem;
+    justify-content: center;
+    align-items: center;
+
+    &--name {
+      padding: 1rem 0;
+    }
+  }
+
+  &__icon {
+    color: $accent;
+  }
+}
+
+::ng-deep.user-dropdown__menu {
+  background-color: $primary-800;
+}
+
+::ng-deep.user-dropdown__option {
+  color: $accent;
+}

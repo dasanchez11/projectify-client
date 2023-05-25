@@ -1,0 +1,16 @@
+<button mat-button [matMenuTriggerFor]="afterMenu" class="user-dropdown">
+  <div class="user-dropdown__image">
+    <span *ngIf="userName" class="user-dropdown__name">
+      {{ userName[0] | uppercase }}
+    </span>
+  </div>
+</button>
+<mat-menu class="user-dropdown__menu" #afterMenu="matMenu" xPosition="before">
+  <span class="user-dropdown__option user-dropdown__option--name">{{
+    userName | uppercase
+  }}</span>
+  <button class="user-dropdown__option" (click)="handleLogout()" mat-menu-item>
+    <mat-icon class="user-dropdown__icon">logout</mat-icon>
+    <span class="user-dropdown__text">Logout</span>
+  </button>
+</mat-menu>

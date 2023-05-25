@@ -1,0 +1,121 @@
+@import "variables";
+
+.login {
+  min-height: calc(100vh - $header-height);
+  width: 100vw;
+  margin: 0 auto;
+  padding-top: 2rem;
+
+  &__header {
+    margin-bottom: 1rem;
+    margin: 2rem auto;
+    padding: 0 1rem;
+  }
+
+  &__container {
+    background-color: $primary-800;
+    margin: 0 auto;
+    max-width: 60rem;
+    width: 70%;
+    min-height: 70%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-radius: $border;
+    gap: 1rem;
+    color: $accent;
+
+    @media (max-width: 930px) {
+      width: 85%;
+    }
+
+    @media (max-width: 500px) {
+      width: 95%;
+    }
+  }
+
+  &__card {
+    margin-bottom: 1.5rem;
+    width: 70%;
+    max-width: 30rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 25rem;
+    height: auto;
+    background-color: white;
+    color: black;
+
+    @media (max-width: 930px) {
+      width: 85%;
+    }
+
+    @media (max-width: 500px) {
+      width: 95%;
+    }
+  }
+
+  &__input {
+    position: relative;
+  }
+
+  &__icon {
+    position: absolute;
+    right: 5%;
+    top: 2rem;
+    translate: 0 -50%;
+    cursor: pointer;
+  }
+
+  &__header {
+    align-self: flex-start;
+  }
+
+  &__content {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  &__form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  &__full-width {
+    width: 100%;
+  }
+
+  &__button {
+    margin: 0 auto;
+    align-self: center;
+  }
+
+  &__login__button-content {
+    display: flex;
+    flex-direction: row;
+  }
+
+  &__contact {
+    color: $primary-darker;
+    text-align: center;
+    padding-top: 0.7rem;
+  }
+
+  a {
+    text-decoration: none;
+    color: $primary-darker;
+    font-weight: bolder;
+  }
+
+  &--link {
+    padding-top: 0.7rem;
+    cursor: pointer;
+    font-weight: bold;
+    text-decoration: none;
+  }
+}
