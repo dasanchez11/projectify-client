@@ -6,6 +6,7 @@
 $border: 4px;
 $header-height: 4rem;
 $max-width: 1400px;
+$box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 
 // Copy the palettes from your selected theme (usually theme.scss).
 $app-primary: mat.define-palette(mat.$cyan-palette);

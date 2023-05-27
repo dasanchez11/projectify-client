@@ -1,0 +1,43 @@
+@import "variables";
+
+.report {
+  color: white;
+  margin: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  &__title {
+    margin: 0 auto;
+    text-align: center;
+    font-size: 3rem;
+  }
+
+  &__container {
+    max-width: 95vw;
+    margin: 1rem 0;
+    display: flex;
+    flex-direction: row;
+    gap: 0.3rem;
+    overflow-x: scroll;
+  }
+
+  &__button {
+    margin-top: 0.5rem;
+  }
+
+  &__days {
+    display: flex;
+    flex-direction: row;
+  }
+
+  .mat-mdc-card-title,
+  .mat-mdc-card-content {
+    color: black;
+  }
+
+  .mat-mdc-card {
+    border: 1px solid gray;
+    width: 7rem;
+  }
+}

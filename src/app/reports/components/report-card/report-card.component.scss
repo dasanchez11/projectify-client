@@ -1,0 +1,15 @@
+@import "variables";
+
+.card {
+  padding: 1rem;
+  margin: 1rem auto;
+  width: 95%;
+  min-height: 5rem;
+  box-shadow: $box-shadow;
+  background-color: aquamarine;
+  border-radius: $border;
+
+  &__title {
+    padding: 1rem 0;
+  }
+}
