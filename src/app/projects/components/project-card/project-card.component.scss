@@ -1,8 +1,8 @@
 @import "variables";
 
 .project-card {
-  min-height: 10rem;
-  max-width: 20rem;
+  height: 20rem;
+  width: 20rem;
   border-radius: $border;
   display: flex;
   flex-direction: column;
