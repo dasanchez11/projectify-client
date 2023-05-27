@@ -1,3 +1,12 @@
 <div class="report-specific">
-  <app-report-card></app-report-card>
+  <div class="report-specific__button">
+    <button mat-raised-button color="primary" (click)="handleNew()">
+      {{ isNew ? "Cancel" : "Add New Project" }}
+    </button>
+  </div>
+  <app-report-edit
+    *ngIf="isEdit || isNew"
+    [title]="isEdit ? 'Edit' : 'Create'"
+  ></app-report-edit>
+  <app-report-card (editClick)="handleEdit()" [edit]="isEdit"></app-report-card>
 </div>

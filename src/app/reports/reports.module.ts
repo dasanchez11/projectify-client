@@ -8,15 +8,24 @@ import { MatIconModule } from '@angular/material/icon';
 import { ReportCardComponent } from './components/report-card/report-card.component';
 import { ReportEditComponent } from './components/report-edit/report-edit.component';
 import { ReportSpecificComponent } from './components/report-specific/report-specific.component';
+import { MatInputModule } from '@angular/material/input';
+import { MatSelectModule } from '@angular/material/select';
 
 @NgModule({
-  declarations: [ReportMainComponent, ReportCardComponent, ReportEditComponent, ReportSpecificComponent],
+  declarations: [
+    ReportMainComponent,
+    ReportCardComponent,
+    ReportEditComponent,
+    ReportSpecificComponent,
+  ],
   imports: [
     CommonModule,
     ReportRoutingModule,
     MatCardModule,
     MatButtonModule,
     MatIconModule,
+    MatInputModule,
+    MatSelectModule,
   ],
 })
 export class ReportsModule {}

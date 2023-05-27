@@ -24,7 +24,7 @@ $angular-material-warn: mat.define-palette(mat.$red-palette);
 $angular-material-theme: mat.define-light-theme(
   (
     color: (
-      primary: $angular-material-accent,
+      primary: $angular-material-primary,
       accent: $angular-material-accent,
       warn: $angular-material-warn,
     ),

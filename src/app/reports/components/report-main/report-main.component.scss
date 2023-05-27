@@ -13,6 +13,17 @@
     font-size: 3rem;
   }
 
+  &__actions {
+    max-width: 95vw;
+    margin: 1rem 0;
+    display: flex;
+    flex-direction: row;
+    gap: 0.3rem;
+    overflow-x: scroll;
+    min-width: 49rem;
+    justify-content: space-between;
+  }
+
   &__container {
     max-width: 95vw;
     margin: 1rem 0;

@@ -1,8 +1,23 @@
-<div class="card">
-  <h3 class="card__title">ProjectTitle</h3>
+<div class="card" [style.background]="bgColor">
+  <h3 class="card__title">ProjectTite</h3>
   <p class="card__content">
     Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatem id unde
     ratione voluptas minima sed ut necessitatibus, amet voluptates soluta totam
     corrupti provident earum officia quo aliquam tenetur. Fuga, alias?
   </p>
+  <div class="card__action">
+    <button mat-fab color="warn" (click)="(handleDelete)">
+      <mat-icon>delete</mat-icon>
+    </button>
+    <div class="card__icon" [classList]="edit && 'card__icon--active'">
+      <button
+        class="card__edit"
+        mat-fab
+        [color]="edit ? 'warn' : 'primary'"
+        (click)="handleEdit()"
+      >
+        <mat-icon>add</mat-icon>
+      </button>
+    </div>
+  </div>
 </div>

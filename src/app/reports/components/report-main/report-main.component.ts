@@ -72,8 +72,3 @@ export class ReportMainComponent implements OnInit {
     this.router.navigate([`reports/week/${followYear}-W${followWeek}`]);
   }
 }
-
-const weekNumber = 22;
-const year = 2023;
-const monthDayNumbers = getMonthDayNumbersForWeek(weekNumber, year);
-console.log(monthDayNumbers);

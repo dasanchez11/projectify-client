@@ -1,5 +1,9 @@
 .report-specific {
-  height: 20rem;
+  min-height: 20rem;
   width: 50rem;
-  border: 1px solid red;
+  padding: 0.4rem;
+
+  &__button {
+    margin: 1rem 0;
+  }
 }
