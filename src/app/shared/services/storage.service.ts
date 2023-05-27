@@ -1,8 +1,6 @@
 import { Injectable } from '@angular/core';
 
-@Injectable({
-  providedIn: 'root',
-})
+@Injectable()
 export class StorageService {
   setElement<T>(name: string, value: T) {
     localStorage.setItem(name, JSON.stringify(value));
@@ -14,5 +12,9 @@ export class StorageService {
       return <T>JSON.parse(value);
     }
     return null;
+  }
+
+  clearItem(name: string) {
+    localStorage.removeItem(name);
   }
 }

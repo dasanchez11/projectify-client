@@ -1,0 +1,25 @@
+@import "variables";
+
+.project-card {
+  height: 20rem;
+  width: 20rem;
+  border-radius: $border;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  transition: all 100ms ease-in;
+  &__title {
+    font-size: 2rem;
+    margin: 1rem 2rem;
+  }
+
+  &__description {
+    margin: 1rem 2rem;
+  }
+
+  &:hover {
+    transform: scale(1.01);
+  }
+}

@@ -8,10 +8,11 @@ import {
 import { Observable } from 'rxjs';
 import { StorageService } from '../services/storage.service';
 import { CurrentUser } from '../models/current-user.model';
+import { Router } from '@angular/router';
 
 @Injectable()
 export class TokenInterceptor implements HttpInterceptor {
-  constructor(private storageService: StorageService) {}
+  constructor(private storageService: StorageService, private router: Router) {}
 
   intercept(
     req: HttpRequest<any>,
@@ -19,9 +20,14 @@ export class TokenInterceptor implements HttpInterceptor {
   ): Observable<HttpEvent<any>> {
     const currentUser =
       this.storageService.getElement<CurrentUser>('currentUser');
-    const authRoute = req.params.get('auth-route');
+    const authRoute = req.params.get('authRoute');
+    let valid = false;
 
-    if (!currentUser?.token || !authRoute) {
+    if (currentUser?.expiresAt) {
+      valid = this.tokenExpired(currentUser.expiresAt);
+    }
+
+    if (!currentUser?.token || !authRoute || !valid) {
       return next.handle(req);
     }
 
@@ -33,5 +39,15 @@ export class TokenInterceptor implements HttpInterceptor {
       },
     });
     return next.handle(tokenizedRequest);
+  }
+
+  tokenExpired(expiration: number) {
+    const valid = expiration > Date.now() / 1000;
+    if (!valid) {
+      this.storageService.clearItem('currentUser');
+      this.router.navigate(['auth/login']);
+      return false;
+    }
+    return valid;
   }
 }

@@ -21,6 +21,9 @@ export class HeaderComponent implements OnInit, OnDestroy {
         if (user) {
           this.firstname = user?.firstname;
           this.isLoggedIn = !!user;
+        } else {
+          this.firstname = '';
+          this.isLoggedIn = false;
         }
       });
   }
