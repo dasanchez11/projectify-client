@@ -1,18 +1,16 @@
-import { Component, OnInit } from '@angular/core';
-import { Subject, distinctUntilChanged, takeUntil } from 'rxjs';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { CurrentUserService } from '../../services/current-user.service';
-import { CurrentUser } from '../../models/current-user.model';
+import { Subject, distinctUntilChanged, takeUntil } from 'rxjs';
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss'],
 })
-export class HeaderComponent implements OnInit {
-  isLoggedIn!: boolean;
+export class HeaderComponent implements OnInit, OnDestroy {
   readonly #unsubscribe$ = new Subject<void>();
-  currentUser!: CurrentUser;
-  username: string | undefined = '';
+  firstname!: string;
+  isLoggedIn!: boolean;
 
   constructor(private currentUserService: CurrentUserService) {}
 
@@ -20,13 +18,14 @@ export class HeaderComponent implements OnInit {
     this.currentUserService.currentUser$
       .pipe(takeUntil(this.#unsubscribe$), distinctUntilChanged())
       .subscribe((user) => {
-        if (!user) return;
-        this.username = user.name;
-        this.isLoggedIn = !!user;
+        if (user) {
+          this.firstname = user?.firstname;
+          this.isLoggedIn = !!user;
+        }
       });
   }
 
-  public ngOnDestroy(): void {
+  ngOnDestroy(): void {
     this.#unsubscribe$.next();
     this.#unsubscribe$.complete();
   }

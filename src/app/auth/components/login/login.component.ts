@@ -1,41 +1,59 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { AuthHttpService } from '../../services/auth-http.service';
+import { LoginCredentials } from '../../models/login.model';
+import { AuthService } from '../../services/auth.service';
+import { CurrentUserService } from '../../../shared/services/current-user.service';
+import { Subject, distinctUntilChanged, takeUntil } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss'],
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent implements OnInit, OnDestroy {
+  readonly #unsubscribe$ = new Subject<void>();
   visiblePassword: boolean = false;
-  // loginSubscription!: Subscription;
   loading: boolean = false;
 
-  constructor() // private currentUser: CurrentUserService // private currentUserFetch: CurrentUserFetchService, // private router: Router,
-  {}
+  constructor(
+    private authHttp: AuthHttpService,
+    private authService: AuthService,
+    private currentUserService: CurrentUserService,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
-    // this.currentUser.loading.subscribe((value) => {
-    //   this.loading = value;
-    // });
+    this.authService.isLoading$
+      .pipe(takeUntil(this.#unsubscribe$), distinctUntilChanged())
+      .subscribe((value) => {
+        this.loading = value;
+      });
   }
 
   loginForm = new FormGroup({
-    email: new FormControl('', [Validators.required, Validators.email]),
-    password: new FormControl('', [
+    email: new FormControl('diego@example.com', [
+      Validators.required,
+      Validators.email,
+    ]),
+    password: new FormControl('password', [
       Validators.required,
       Validators.minLength(8),
     ]),
   });
 
   onSubmit() {
-    // if (this.loginForm.valid) {
-    //   this.loginSubscription = this.currentUserFetch
-    //     .postLogin(<Ilogin>this.loginForm.value)
-    //     .subscribe((value) => {
-    //       value && this.router.navigate(['home']);
-    //     });
-    // }
+    this.currentUserService.setCurrentUser$({ name: 'diego' } as any);
+    if (this.loginForm.valid) {
+      this.authHttp
+        .login(this.loginForm.value as LoginCredentials)
+        .subscribe((value) => {
+          if (value) {
+            this.router.navigate(['/projects']);
+          }
+        });
+    }
   }
 
   toggleVisibility() {
@@ -44,5 +62,10 @@ export class LoginComponent implements OnInit {
 
   getControl(name: string) {
     return <FormControl>this.loginForm.get(name);
+  }
+
+  ngOnDestroy(): void {
+    this.#unsubscribe$.next();
+    this.#unsubscribe$.complete();
   }
 }

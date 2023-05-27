@@ -83,3 +83,18 @@ input.ng-invalid.ng-touched {
 input.ng-invalid.ng-dirty {
   color: 1px solid $warn;
 }
+
+.mat-mdc-snack-bar-container {
+  border-radius: $border;
+  &.snackbar_warn {
+    --mdc-snackbar-container-color: rgb(124, 12, 12);
+    --mat-mdc-snack-bar-button-color: #fff;
+    --mdc-snackbar-supporting-text-color: white;
+  }
+
+  &.snackbar_success {
+    --mdc-snackbar-container-color: rgb(4, 82, 4);
+    --mat-mdc-snack-bar-button-color: #fff;
+    --mdc-snackbar-supporting-text-color: white;
+  }
+}

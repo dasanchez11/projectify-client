@@ -13,6 +13,7 @@ import { MatInputModule } from '@angular/material/input';
 import { AuthService } from './services/auth.service';
 import { AuthHttpService } from './services/auth-http.service';
 import { SharedModule } from '../shared/shared.module';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [LoginComponent, RegisterComponent],
@@ -27,6 +28,7 @@ import { SharedModule } from '../shared/shared.module';
     MatIconModule,
     MatButtonModule,
     SharedModule,
+    HttpClientModule,
   ],
   providers: [AuthService, AuthHttpService],
 })

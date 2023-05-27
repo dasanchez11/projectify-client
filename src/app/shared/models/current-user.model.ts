@@ -1,5 +1,7 @@
 export interface CurrentUser {
-  id: string;
-  name: string;
   token: string;
+  firstname: string;
+  email: string;
+  userId: string;
+  expiresAt: number;
 }

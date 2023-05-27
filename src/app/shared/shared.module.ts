@@ -6,7 +6,9 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { RouterModule } from '@angular/router';
-import { CurrentUserService } from './services/current-user.service';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { NotificationService } from './services/notification.service';
+import { StorageService } from './services/storage.service';
 
 @NgModule({
   declarations: [HeaderComponent, UserDropdownComponent],
@@ -16,8 +18,9 @@ import { CurrentUserService } from './services/current-user.service';
     MatButtonModule,
     MatIconModule,
     RouterModule,
+    MatSnackBarModule,
   ],
   exports: [HeaderComponent],
-  providers: [CurrentUserService],
+  providers: [NotificationService, StorageService],
 })
 export class SharedModule {}

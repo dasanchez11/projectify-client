@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { AuthHttpService } from '../../services/auth-http.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-register',
@@ -12,20 +14,22 @@ export class RegisterComponent implements OnInit {
   visiblePassword: boolean = false;
   visibleConfirm: boolean = false;
 
-  constructor() {}
+  constructor(private authHttp: AuthHttpService, private router: Router) {}
 
   ngOnInit(): void {
     this.registerForm = new FormGroup(
       {
-        firstName: new FormControl('', [Validators.required]),
-        lastName: new FormControl('', [Validators.required]),
-        username: new FormControl('', [Validators.required]),
-        email: new FormControl('', [Validators.required, Validators.email]),
-        password: new FormControl('', [
+        firstname: new FormControl('Diego', [Validators.required]),
+        lastname: new FormControl('Sanchez', [Validators.required]),
+        email: new FormControl('diego@example.com', [
+          Validators.required,
+          Validators.email,
+        ]),
+        password: new FormControl('password', [
           Validators.required,
           Validators.minLength(8),
         ]),
-        confirmPassword: new FormControl('', [
+        confirmPassword: new FormControl('password', [
           Validators.required,
           Validators.minLength(8),
         ]),
@@ -34,7 +38,18 @@ export class RegisterComponent implements OnInit {
     );
   }
 
-  onSubmit() {}
+  onSubmit() {
+    if (this.registerForm.valid) {
+      const { firstname, lastname, email, password } = this.registerForm.value;
+      this.authHttp
+        .register({ firstname, lastname, email, password })
+        .subscribe((value) => {
+          if (value) {
+            this.router.navigate(['auth/login']);
+          }
+        });
+    }
+  }
 
   toggleVisibility(name: string) {
     if (name === 'password') {

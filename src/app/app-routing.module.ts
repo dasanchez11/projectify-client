@@ -19,7 +19,7 @@ const routes: Routes = [
     loadChildren: () =>
       import('./reports/reports.module').then((module) => module.ReportsModule),
   },
-  { path: '**', redirectTo: '/auth' },
+  { path: '**', redirectTo: '/auth/login' },
 ];
 
 @NgModule({
