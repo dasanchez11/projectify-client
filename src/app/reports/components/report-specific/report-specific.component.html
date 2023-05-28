@@ -8,5 +8,13 @@
     *ngIf="isEdit || isNew"
     [title]="isEdit ? 'Edit' : 'Create'"
   ></app-report-edit>
-  <app-report-card (editClick)="handleEdit()" [edit]="isEdit"></app-report-card>
+  <app-report-card
+    *ngFor="let report of reports"
+    [title]="report.name"
+    [description]="report.description"
+    [reportId]="report._id"
+    [hours]="report.hours"
+    (editClick)="handleEdit()"
+    [edit]="isEdit"
+  ></app-report-card>
 </div>

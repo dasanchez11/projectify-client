@@ -1,9 +1,9 @@
 import { CanActivateFn, Router } from '@angular/router';
-import { CurrentUserService } from '../../shared/services/current-user.service';
+import { CurrentUserService } from '../services/current-user.service';
 import { inject } from '@angular/core';
 import { map, take } from 'rxjs';
 
-export const projectGuard: CanActivateFn = () => {
+export const currentUserGuard: CanActivateFn = (route, state) => {
   const currentUserService: CurrentUserService = inject(CurrentUserService);
   const router: Router = inject(Router);
   return currentUserService.currentUser$.pipe(

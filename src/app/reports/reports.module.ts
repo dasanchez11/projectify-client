@@ -10,6 +10,9 @@ import { ReportEditComponent } from './components/report-edit/report-edit.compon
 import { ReportSpecificComponent } from './components/report-specific/report-specific.component';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
+import { ReportHttpService } from './services/report-http.service';
+import { ReportService } from './services/report.service';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -26,6 +29,8 @@ import { MatSelectModule } from '@angular/material/select';
     MatIconModule,
     MatInputModule,
     MatSelectModule,
+    HttpClientModule,
   ],
+  providers: [ReportHttpService, ReportService],
 })
 export class ReportsModule {}

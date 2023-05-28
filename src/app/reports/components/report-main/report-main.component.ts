@@ -10,6 +10,8 @@ import {
 } from '../../utils/reports.utils';
 import { WeekMap } from '../../models/week-map.model';
 import { getMonthDayNumbersForWeek } from '../../utils/date.utils';
+import { ReportService } from '../../services/report.service';
+import { ReportHttpService } from '../../services/report-http.service';
 
 @Component({
   selector: 'app-report-main',
@@ -22,7 +24,11 @@ export class ReportMainComponent implements OnInit {
   yearNumber!: number;
   monthName!: string;
 
-  constructor(private activatedRoute: ActivatedRoute, private router: Router) {}
+  constructor(
+    private activatedRoute: ActivatedRoute,
+    private router: Router,
+    private reportHttp: ReportHttpService
+  ) {}
 
   ngOnInit(): void {
     this.activatedRoute.paramMap.subscribe((params) => {
@@ -39,11 +45,14 @@ export class ReportMainComponent implements OnInit {
         const { weekNumber, year } = getIsoDateFromCurrentDate();
         this.router.navigate([`reports/week/${year}-W${weekNumber}`]);
       }
+      if (validWeek && week) {
+        this.reportHttp.getWeeklyReport(week).subscribe();
+      }
     });
   }
 
   validDateFormat(input: string): boolean {
-    const regExp = new RegExp(/^20\d{2}-W\d{2}$/);
+    const regExp = new RegExp(/^20\d{2}-W(0[1-9]|[1-4][0-9]|5[0-3])$/);
     const valid = regExp.test(input);
     if (!valid) {
       this.router.navigate(['/projects']);
