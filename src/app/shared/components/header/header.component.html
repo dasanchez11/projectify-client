@@ -2,6 +2,24 @@
   <div class="header__container">
     <div class="header__logo">PROJECTIFY</div>
     <div class="header__items">
+      <button
+        mat-button
+        color="accent"
+        *ngIf="isLoggedIn"
+        routerLink="/projects"
+        class="header__item"
+      >
+        Projects
+      </button>
+      <button
+        mat-button
+        color="accent"
+        *ngIf="isLoggedIn"
+        routerLink="/reports"
+        class="header__item"
+      >
+        Reports
+      </button>
       <app-user-dropdown
         *ngIf="isLoggedIn"
         class="header__item header__item--dropdown"

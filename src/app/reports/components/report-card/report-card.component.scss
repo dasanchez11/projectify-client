@@ -17,11 +17,4 @@
     gap: 1rem;
     justify-content: flex-end;
   }
-
-  &__icon {
-    &--active {
-      transition: all 200ms ease;
-      transform: rotate(45deg);
-    }
-  }
 }

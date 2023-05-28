@@ -9,6 +9,8 @@ import { RouterModule } from '@angular/router';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { NotificationService } from './services/notification.service';
 import { StorageService } from './services/storage.service';
+import { HttpClientModule } from '@angular/common/http';
+import { SharedHttpService } from './services/shared-http.service';
 
 @NgModule({
   declarations: [HeaderComponent, UserDropdownComponent],
@@ -19,8 +21,9 @@ import { StorageService } from './services/storage.service';
     MatIconModule,
     RouterModule,
     MatSnackBarModule,
+    HttpClientModule,
   ],
   exports: [HeaderComponent],
-  providers: [NotificationService, StorageService],
+  providers: [NotificationService, StorageService, SharedHttpService],
 })
 export class SharedModule {}

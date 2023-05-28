@@ -13,6 +13,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { ReportHttpService } from './services/report-http.service';
 import { ReportService } from './services/report.service';
 import { HttpClientModule } from '@angular/common/http';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -30,6 +31,7 @@ import { HttpClientModule } from '@angular/common/http';
     MatInputModule,
     MatSelectModule,
     HttpClientModule,
+    ReactiveFormsModule,
   ],
   providers: [ReportHttpService, ReportService],
 })

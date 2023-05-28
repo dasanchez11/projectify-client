@@ -4,17 +4,12 @@
     {{ description }}
   </p>
   <div class="card__action">
-    <button mat-fab color="warn" (click)="(handleDelete)">
+    <button mat-fab color="warn" (click)="handleDelete()">
       <mat-icon>delete</mat-icon>
     </button>
     <div class="card__icon" [classList]="edit && 'card__icon--active'">
-      <button
-        class="card__edit"
-        mat-fab
-        [color]="edit ? 'warn' : 'primary'"
-        (click)="handleEdit()"
-      >
-        <mat-icon>add</mat-icon>
+      <button class="card__edit" mat-fab color="primary" (click)="handleEdit()">
+        <mat-icon>edit</mat-icon>
       </button>
     </div>
   </div>

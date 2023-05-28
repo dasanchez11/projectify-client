@@ -1,49 +1,38 @@
-export function getMonthDayNumbersForWeek(
-  weekNumber: number,
-  year: number
+export function getMonthDaysOfWeek(
+  week: number,
+  year: number,
+  startDayOfWeek: number = 1
 ): number[] {
-  const monthDayNumbers: number[] = [];
-  const month = getMonthNumberForWeek(weekNumber, year);
-  const date = new Date(year, month - 1, 1);
-  const firstWeekNumber = getWeekNumber(date);
-  const weekDiff = weekNumber - firstWeekNumber;
-  date.setDate(date.getDate() + weekDiff * 7);
+  const firstDayOfWeek = getFirstDayOfWeek(week, year, startDayOfWeek);
+  const monthDays: number[] = [];
+
   for (let i = 0; i < 7; i++) {
-    monthDayNumbers.push(date.getDate());
-    date.setDate(date.getDate() + 1);
+    const date = new Date(
+      firstDayOfWeek.getFullYear(),
+      firstDayOfWeek.getMonth(),
+      firstDayOfWeek.getDate() + i
+    );
+    monthDays.push(date.getDate());
   }
 
-  return monthDayNumbers;
+  return monthDays;
 }
 
-function getWeekNumber(date: Date): number {
-  const firstDayOfYear = new Date(date.getFullYear(), 0, 1);
-  const diffInDays = Math.floor(
-    (date.getTime() - firstDayOfYear.getTime()) / (24 * 60 * 60 * 1000)
-  );
-  const weekNumber = Math.ceil((firstDayOfYear.getDay() + 1 + diffInDays) / 7);
-  return weekNumber;
-}
+function getFirstDayOfWeek(
+  week: number,
+  year: number,
+  startDayOfWeek: number = 0
+): Date {
+  // Create a new date object for the first day of the given year
+  const date = new Date(year, 0, 1);
 
-function getMonthNumberForWeek(weekNumber: number, year: number): number {
-  for (let month = 0; month < 12; month++) {
-    const firstDayOfMonth = new Date(year, month, 1);
-    const firstWeekNumber = getWeekNumber(firstDayOfMonth);
-    if (
-      weekNumber >= firstWeekNumber &&
-      weekNumber <= firstWeekNumber + getWeeksInMonth(year, month)
-    ) {
-      return month + 1;
-    }
-  }
+  // Adjust the date to the first day of the week
+  const dayOfWeek = date.getDay();
+  const diff = startDayOfWeek - dayOfWeek;
+  const firstDayOfWeek = new Date(date.getFullYear(), 0, date.getDate() + diff);
 
-  return -1;
-}
+  // Set the date to the first day of the target week
+  firstDayOfWeek.setDate(firstDayOfWeek.getDate() + (week - 1) * 7);
 
-function getWeeksInMonth(year: number, month: number): number {
-  const lastDayOfMonth = new Date(year, month + 1, 0);
-  const lastWeekNumber = getWeekNumber(lastDayOfMonth);
-  const weeksInMonth =
-    lastWeekNumber - getWeekNumber(new Date(year, month, 1)) + 1;
-  return weeksInMonth;
+  return firstDayOfWeek;
 }

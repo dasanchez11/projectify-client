@@ -1,39 +1,21 @@
-import { getMonthDayNumbersForWeek } from './date.utils';
+import { getMonthDaysOfWeek } from './date.utils';
 
 export const getWeek = (weekNum: number, year: number) => {
-  const weekDays = getMonthDayNumbersForWeek(weekNum, year);
+  const weekDays = getMonthDaysOfWeek(weekNum, year, 0);
   const daysName = [
+    'Sunday',
     'Monday',
     'Tuesday',
     'Wednesday',
     'Thursday',
     'Friday',
     'Saturday',
-    'Sunday',
   ];
   return weekDays.map((day, idx) => {
     const dayname = daysName[idx];
     return { dayname, day };
   });
 };
-
-const getSundayFromWeekNum = (weekNum: number, year: number) => {
-  var sunday = new Date(year, 0, 1 + (weekNum - 1) * 7);
-  while (sunday.getDay() !== 0) {
-    sunday.setDate(sunday.getDate() - 1);
-  }
-  return sunday;
-};
-
-function getWeekdayNumbers(weekNumber: number, year: number) {
-  var weekdays = [];
-  var date = new Date(year, 0, 1 + (weekNumber - 1) * 7);
-  for (var i = 0; i < 7; i++) {
-    weekdays.push(date.getDay());
-    date.setDate(date.getDate() + 1);
-  }
-  return weekdays;
-}
 
 export const getWeekAndYearFromIsoDate = (date: string) => {
   const splitDate = date.split('-');
@@ -54,7 +36,7 @@ export const getIsoDateFromCurrentDate = () => {
 export const getNextWeek = (weekNumber: number, yearNumber: number) => {
   let nextWeek = weekNumber + 1;
   let nexYear = yearNumber;
-  if (weekNumber === 53) {
+  if (weekNumber === getISOWeeks(yearNumber)) {
     nextWeek = 1;
     nexYear += 1;
   }
@@ -66,7 +48,7 @@ export const getPrevWeek = (weekNumber: number, yearNumber: number) => {
   let prevWeek = weekNumber - 1;
   let prevYear = yearNumber;
   if (weekNumber === 1) {
-    prevWeek = 53;
+    prevWeek = getISOWeeks(yearNumber - 1);
     prevYear -= 1;
   }
   const returnWeek = prevWeek < 10 ? '0' + prevWeek : prevWeek.toString();
@@ -92,4 +74,12 @@ export const getMontName = (week: number, year: number) => {
   ];
 
   return monthNames[new Date(date.setDate(week * 7)).getMonth()];
+};
+
+const getISOWeeks = (y: number) => {
+  var d, isLeap;
+
+  d = new Date(y, 0, 1);
+  isLeap = new Date(y, 1, 29).getMonth() === 1;
+  return d.getDay() === 4 || (isLeap && d.getDay() === 3) ? 53 : 52;
 };

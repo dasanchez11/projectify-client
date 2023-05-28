@@ -1,4 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { ReportHttpService } from '../../services/report-http.service';
+import { ReportService } from '../../services/report.service';
 
 @Component({
   selector: 'app-report-card',
@@ -14,10 +16,17 @@ export class ReportCardComponent {
   @Input() reportId!: string;
   @Input() hours!: number;
 
+  constructor(private reportHttp: ReportHttpService) {}
+
   handleEdit() {
     this.edit = !this.edit;
     this.editClick.emit(this.reportId);
   }
 
-  handleDelete() {}
+  handleDelete() {
+    const result = confirm('Are you sure you want to delete this report');
+    if (result) {
+      this.reportHttp.deleteReport(this.reportId).subscribe();
+    }
+  }
 }

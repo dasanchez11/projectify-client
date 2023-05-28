@@ -26,4 +26,33 @@ export class ReportService {
   setIsLoading$(value: boolean) {
     this._isLoading$.next(value);
   }
+
+  deleteReport(deleteId: string) {
+    const reports = this._report$.getValue();
+    if (reports) {
+      const newReports = reports.filter((item) => item._id !== deleteId);
+      this.setReport$(newReports);
+    }
+  }
+
+  editReport(reportId: string, hours: number) {
+    const reports = this._report$.getValue();
+    if (reports) {
+      const newReports = reports.map((report) => {
+        if (report._id === reportId) {
+          return { ...report, hours };
+        }
+        return report;
+      });
+      this.setReport$(newReports);
+    }
+  }
+
+  createReport(report: ReportResponse) {
+    const reports = this._report$.getValue();
+    if (reports) {
+      const newReports = [...reports, report];
+      this.setReport$(newReports);
+    }
+  }
 }

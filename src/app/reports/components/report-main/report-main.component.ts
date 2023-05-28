@@ -9,8 +9,6 @@ import {
   getMontName,
 } from '../../utils/reports.utils';
 import { WeekMap } from '../../models/week-map.model';
-import { getMonthDayNumbersForWeek } from '../../utils/date.utils';
-import { ReportService } from '../../services/report.service';
 import { ReportHttpService } from '../../services/report-http.service';
 
 @Component({
@@ -23,6 +21,7 @@ export class ReportMainComponent implements OnInit {
   weekNumber!: number;
   yearNumber!: number;
   monthName!: string;
+  weekIsoFormat!: string;
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -37,6 +36,7 @@ export class ReportMainComponent implements OnInit {
       if (week) {
         validWeek = this.validDateFormat(week);
         const { currentWeek, currentYear } = getWeekAndYearFromIsoDate(week);
+        this.weekIsoFormat = week;
         this.weekNumber = currentWeek;
         this.yearNumber = currentYear;
         this.weekMap = getWeek(currentWeek, currentYear);
