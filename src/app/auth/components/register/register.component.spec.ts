@@ -11,6 +11,7 @@ import { AbstractControl } from '@angular/forms';
 import { HarnessLoader } from '@angular/cdk/testing';
 import { of } from 'rxjs';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { cleanStylesFromDom } from '../../../shared/test/test-helper';
 
 describe('RegisterComponent', () => {
   let component: RegisterComponent;
@@ -36,6 +37,10 @@ describe('RegisterComponent', () => {
     component = fixture.componentInstance;
     mockRouter = TestBed.inject(Router);
     mockAuthHttp = TestBed.inject(AuthHttpService);
+  });
+
+  afterAll(() => {
+    cleanStylesFromDom();
   });
 
   it('should create', () => {

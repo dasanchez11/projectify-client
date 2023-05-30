@@ -16,6 +16,7 @@ import { HarnessLoader } from '@angular/cdk/testing';
 import { MatButtonHarness } from '@angular/material/button/testing';
 import { MatInputHarness } from '@angular/material/input/testing';
 import { AbstractControl } from '@angular/forms';
+import { cleanStylesFromDom } from '../../../shared/test/test-helper';
 
 describe('LoginComponent', () => {
   let component: LoginComponent;
@@ -61,6 +62,10 @@ describe('LoginComponent', () => {
     mockAuthHttp = TestBed.inject(AuthHttpService);
     mockAuthService = TestBed.inject(AuthService);
     fixture.detectChanges();
+  });
+
+  afterAll(() => {
+    cleanStylesFromDom();
   });
 
   it('should create', () => {

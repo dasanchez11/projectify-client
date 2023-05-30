@@ -33,7 +33,7 @@ export class ProjectHttpService {
       }),
       catchError((error) => {
         this.notificationService.openSnackBar(error.error.message, true);
-        return EMPTY;
+        throw error;
       }),
       finalize(() => {
         this.projectService.setIsLoading$(false);

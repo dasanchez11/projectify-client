@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { LoginCredentials } from '../models/login.model';
 import { AuthService } from './auth.service';
-import { EMPTY, Observable, catchError, finalize, tap } from 'rxjs';
+import { Observable, catchError, finalize, tap } from 'rxjs';
 import { NotificationService } from '../../shared/services/notification.service';
 import { CurrentUser } from '../../shared/models/current-user.model';
 import { CurrentUserService } from '../../shared/services/current-user.service';
@@ -59,7 +59,7 @@ export class AuthHttpService {
       catchError((error) => {
         const returnError = error.error.message || error.message;
         this.notificatonService.openSnackBar(returnError, true);
-        return EMPTY;
+        throw error;
       }),
       finalize(() => {
         this.authService.setIsLoading$(false);
