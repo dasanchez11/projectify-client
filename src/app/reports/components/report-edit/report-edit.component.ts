@@ -33,8 +33,10 @@ export class ReportEditComponent implements OnInit {
           this.currentReports = rep;
         }
       });
+
     this.reportHttp.getProjects().subscribe((projects) => {
       if (projects) {
+        console.log(projects);
         this.projects = projects;
       }
     });
