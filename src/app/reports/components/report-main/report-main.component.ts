@@ -9,7 +9,8 @@ import {
   getMontName,
 } from '../../utils/reports.utils';
 import { WeekMap } from '../../models/week-map.model';
-import { getMonthDayNumbersForWeek } from '../../utils/date.utils';
+import { ReportHttpService } from '../../services/report-http.service';
+import { Subject, distinctUntilChanged, takeUntil } from 'rxjs';
 
 @Component({
   selector: 'app-report-main',
@@ -17,33 +18,45 @@ import { getMonthDayNumbersForWeek } from '../../utils/date.utils';
   styleUrls: ['./report-main.component.scss'],
 })
 export class ReportMainComponent implements OnInit {
+  readonly #unsubscribe = new Subject<void>();
   weekMap: WeekMap[] = [];
   weekNumber!: number;
   yearNumber!: number;
   monthName!: string;
+  weekIsoFormat!: string;
 
-  constructor(private activatedRoute: ActivatedRoute, private router: Router) {}
+  constructor(
+    private activatedRoute: ActivatedRoute,
+    private router: Router,
+    private reportHttp: ReportHttpService
+  ) {}
 
   ngOnInit(): void {
-    this.activatedRoute.paramMap.subscribe((params) => {
-      const week = params.get('week-value');
-      let validWeek = false;
-      if (week) {
-        validWeek = this.validDateFormat(week);
-        const { currentWeek, currentYear } = getWeekAndYearFromIsoDate(week);
-        this.weekNumber = currentWeek;
-        this.yearNumber = currentYear;
-        this.weekMap = getWeek(currentWeek, currentYear);
-        this.monthName = getMontName(currentWeek, currentYear);
-      } else {
-        const { weekNumber, year } = getIsoDateFromCurrentDate();
-        this.router.navigate([`reports/week/${year}-W${weekNumber}`]);
-      }
-    });
+    this.activatedRoute.paramMap
+      .pipe(takeUntil(this.#unsubscribe), distinctUntilChanged())
+      .subscribe((params) => {
+        const week = params.get('week-value');
+        let validWeek = false;
+        if (week) {
+          validWeek = this.validDateFormat(week);
+          const { currentWeek, currentYear } = getWeekAndYearFromIsoDate(week);
+          this.weekIsoFormat = week;
+          this.weekNumber = currentWeek;
+          this.yearNumber = currentYear;
+          this.weekMap = getWeek(currentWeek, currentYear);
+          this.monthName = getMontName(currentWeek, currentYear);
+        } else {
+          const { weekNumber, year } = getIsoDateFromCurrentDate();
+          this.router.navigate([`reports/week/${year}-W${weekNumber}`]);
+        }
+        if (validWeek && week) {
+          this.reportHttp.getWeeklyReport(week).subscribe();
+        }
+      });
   }
 
   validDateFormat(input: string): boolean {
-    const regExp = new RegExp(/^20\d{2}-W\d{2}$/);
+    const regExp = new RegExp(/^20\d{2}-W(0[1-9]|[1-4][0-9]|5[0-3])$/);
     const valid = regExp.test(input);
     if (!valid) {
       this.router.navigate(['/projects']);
@@ -71,9 +84,9 @@ export class ReportMainComponent implements OnInit {
     }
     this.router.navigate([`reports/week/${followYear}-W${followWeek}`]);
   }
-}
 
-const weekNumber = 22;
-const year = 2023;
-const monthDayNumbers = getMonthDayNumbersForWeek(weekNumber, year);
-console.log(monthDayNumbers);
+  ngOnDestroy(): void {
+    this.#unsubscribe.next();
+    this.#unsubscribe.complete();
+  }
+}

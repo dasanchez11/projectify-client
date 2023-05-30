@@ -6,7 +6,7 @@ import { Component, Input } from '@angular/core';
   styleUrls: ['./project-card.component.scss'],
 })
 export class ProjectCardComponent {
-  bgColor2 = `hsla(${~~(360 * Math.random())}, 70%,  72%, 0.4)`;
+  bgColor = `hsla(${~~(360 * Math.random())}, 70%,  72%, 0.4)`;
   @Input() title!: string;
   @Input() description!: string;
 }

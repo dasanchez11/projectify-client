@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { currentUserGuard } from './shared/guards/current-user.guard';
 
 const routes: Routes = [
   {
@@ -9,6 +10,7 @@ const routes: Routes = [
   },
   {
     path: 'projects',
+    canActivate: [currentUserGuard],
     loadChildren: () =>
       import('./projects/projects.module').then(
         (module) => module.ProjectsModule
@@ -16,6 +18,7 @@ const routes: Routes = [
   },
   {
     path: 'reports',
+    canActivate: [currentUserGuard],
     loadChildren: () =>
       import('./reports/reports.module').then((module) => module.ReportsModule),
   },

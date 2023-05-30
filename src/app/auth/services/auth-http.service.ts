@@ -37,7 +37,8 @@ export class AuthHttpService {
         }
       }),
       catchError((error) => {
-        this.notificatonService.openSnackBar(error.error.message, true);
+        const returnError = error.error.message || error.message;
+        this.notificatonService.openSnackBar(returnError, true);
         return EMPTY;
       }),
       finalize(() => {
@@ -56,8 +57,8 @@ export class AuthHttpService {
         this.notificatonService.openSnackBar(response.message, false);
       }),
       catchError((error) => {
-        console.log({ error });
-        this.notificatonService.openSnackBar(error.error.message, true);
+        const returnError = error.error.message || error.message;
+        this.notificatonService.openSnackBar(returnError, true);
         return EMPTY;
       }),
       finalize(() => {

@@ -1,1 +1,32 @@
-<p>report-edit works!</p>
+<div class="report-edit">
+  <div class="report-edit__container">
+    <h4 class="report-edit__title">
+      {{ title }} your working hours in a project
+    </h4>
+    <form
+      (ngSubmit)="onSubmit()"
+      class="report-edit__form"
+      [formGroup]="createEditForm"
+    >
+      <mat-form-field class="example-full-width">
+        <mat-label>Hours worked</mat-label>
+        <input
+          matInput
+          placeholder="10"
+          value=""
+          formControlName="hours"
+          autocomplete="off"
+        />
+      </mat-form-field>
+      <mat-form-field *ngIf="!toEditId">
+        <mat-label>Project</mat-label>
+        <select formControlName="projectId" matNativeControl required>
+          <option *ngFor="let project of projects" [value]="project._id">
+            {{ project.name }}
+          </option>
+        </select>
+      </mat-form-field>
+      <button mat-raised-button color="primary" type="submit">Submit</button>
+    </form>
+  </div>
+</div>

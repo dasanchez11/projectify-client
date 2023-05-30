@@ -9,10 +9,15 @@ import { Observable } from 'rxjs';
 import { StorageService } from '../services/storage.service';
 import { CurrentUser } from '../models/current-user.model';
 import { Router } from '@angular/router';
+import { CurrentUserService } from '../services/current-user.service';
 
 @Injectable()
 export class TokenInterceptor implements HttpInterceptor {
-  constructor(private storageService: StorageService, private router: Router) {}
+  constructor(
+    private storageService: StorageService,
+    private router: Router,
+    private currentUser: CurrentUserService
+  ) {}
 
   intercept(
     req: HttpRequest<any>,
@@ -25,6 +30,10 @@ export class TokenInterceptor implements HttpInterceptor {
 
     if (currentUser?.expiresAt) {
       valid = this.tokenExpired(currentUser.expiresAt);
+    }
+
+    if (!valid) {
+      this.currentUser.setCurrentUser$(null);
     }
 
     if (!currentUser?.token || !authRoute || !valid) {
