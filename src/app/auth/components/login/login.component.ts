@@ -44,7 +44,6 @@ export class LoginComponent implements OnInit, OnDestroy {
   });
 
   onSubmit() {
-    this.currentUserService.setCurrentUser$({ name: 'diego' } as any);
     if (this.loginForm.valid) {
       this.authHttp
         .login(this.loginForm.value as LoginCredentials)

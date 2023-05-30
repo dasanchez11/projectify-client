@@ -39,7 +39,7 @@ export class AuthHttpService {
       catchError((error) => {
         const returnError = error.error.message || error.message;
         this.notificatonService.openSnackBar(returnError, true);
-        return EMPTY;
+        throw error;
       }),
       finalize(() => {
         this.authService.setIsLoading$(false);
