@@ -1,19 +1,35 @@
-import { CanActivateFn, Router } from '@angular/router';
+import {
+  ActivatedRouteSnapshot,
+  CanActivate,
+  CanActivateFn,
+  Router,
+  RouterStateSnapshot,
+  UrlTree,
+} from '@angular/router';
 import { CurrentUserService } from '../services/current-user.service';
-import { inject } from '@angular/core';
-import { map, take } from 'rxjs';
+import { Injectable } from '@angular/core';
+import { Observable, map, take } from 'rxjs';
 
-export const currentUserGuard: CanActivateFn = (route, state) => {
-  const currentUserService: CurrentUserService = inject(CurrentUserService);
-  const router: Router = inject(Router);
-  return currentUserService.currentUser$.pipe(
-    take(1),
-    map((currentUser) => {
-      const authorized = !!currentUser;
-      if (authorized) {
-        return true;
-      }
-      return router.createUrlTree(['/auth/login']);
-    })
-  );
-};
+@Injectable()
+export class currentUserGuard implements CanActivate {
+  constructor(
+    private currentUserService: CurrentUserService,
+    private router: Router
+  ) {}
+
+  canActivate(
+    route: ActivatedRouteSnapshot,
+    state: RouterStateSnapshot
+  ): Observable<boolean | UrlTree> {
+    return this.currentUserService.currentUser$.pipe(
+      take(1),
+      map((currentUser) => {
+        const authorized = !!currentUser;
+        if (authorized) {
+          return true;
+        }
+        return this.router.createUrlTree(['/auth/login']);
+      })
+    );
+  }
+}

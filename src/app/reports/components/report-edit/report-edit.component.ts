@@ -36,7 +36,6 @@ export class ReportEditComponent implements OnInit {
 
     this.reportHttp.getProjects().subscribe((projects) => {
       if (projects) {
-        console.log(projects);
         this.projects = projects;
       }
     });
