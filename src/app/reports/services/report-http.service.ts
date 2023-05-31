@@ -30,20 +30,22 @@ export class ReportHttpService {
   getWeeklyReport(isoWeek: string) {
     const url = this.baseUrl + `/reports/${isoWeek}`;
     this.reportService.setIsLoading$(true);
-    return this.http.get<BaseHttpResponse<null>>(url, this.options).pipe(
-      tap((response) => {
-        if (response.data) {
-          this.reportService.setReport$(response.data);
-        }
-      }),
-      catchError((error) => {
-        this.notificationService.openSnackBar(error.error.message, true);
-        return EMPTY;
-      }),
-      finalize(() => {
-        this.reportService.setIsLoading$(false);
-      })
-    );
+    return this.http
+      .get<BaseHttpResponse<ReportResponse[]>>(url, this.options)
+      .pipe(
+        tap((response) => {
+          if (response.data) {
+            this.reportService.setReport$(response.data);
+          }
+        }),
+        catchError((error) => {
+          this.notificationService.openSnackBar(error.error.message, true);
+          throw error;
+        }),
+        finalize(() => {
+          this.reportService.setIsLoading$(false);
+        })
+      );
   }
 
   deleteReport(reportId: string) {
@@ -58,7 +60,7 @@ export class ReportHttpService {
       }),
       catchError((error) => {
         this.notificationService.openSnackBar(error.error.message, true);
-        return EMPTY;
+        throw error;
       }),
       finalize(() => {
         this.reportService.setIsLoading$(false);
@@ -69,7 +71,6 @@ export class ReportHttpService {
   editReport(reportId: string, hours: number, projectId: string) {
     const url = this.baseUrl + `/reports/${reportId}`;
     this.reportService.setIsLoading$(true);
-    console.log(hours);
     return this.http
       .put<BaseHttpResponse<ReportResponse[]>>(url, { hours }, this.options)
       .pipe(
@@ -81,7 +82,7 @@ export class ReportHttpService {
         }),
         catchError((error) => {
           this.notificationService.openSnackBar(error.error.message, true);
-          return EMPTY;
+          throw error;
         }),
         finalize(() => {
           this.reportService.setIsLoading$(false);
@@ -99,13 +100,11 @@ export class ReportHttpService {
           if (response.message && response.data) {
             this.notificationService.openSnackBar(response.message, false);
             this.reportService.createReport(response.data[0]);
-            return;
           }
-          return false;
         }),
         catchError((error) => {
           this.notificationService.openSnackBar(error.error.message, true);
-          return EMPTY;
+          throw error;
         }),
         finalize(() => {
           this.reportService.setIsLoading$(false);
