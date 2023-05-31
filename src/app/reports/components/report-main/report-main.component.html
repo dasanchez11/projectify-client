@@ -1,41 +1,43 @@
 <section class="report">
   <h1 class="report__title">Reports for {{ monthName }}</h1>
   <div class="report__container">
-    <div class="report__actions">
-      <button
-        class="report__button"
-        mat-raised-button
-        color="accent"
-        (click)="handleClick(false)"
-      >
-        <mat-icon>chevron_left</mat-icon>
-      </button>
-
-      <button
-        class="report__button"
-        mat-raised-button
-        color="accent"
-        (click)="handleClick(true)"
-      >
-        <mat-icon>chevron_right</mat-icon>
-      </button>
-    </div>
-  </div>
-  <div class="report__container">
-    <div class="report__days">
-      <mat-card *ngFor="let day of weekMap">
-        <mat-card-content
-          >{{ day.dayname | slice : 0 : 3 }} {{ " - "
-          }}{{ day.day }}</mat-card-content
+    <div>
+      <div class="report__actions">
+        <button
+          class="report__button"
+          mat-raised-button
+          color="accent"
+          (click)="handleClick(false)"
         >
-      </mat-card>
+          <mat-icon>chevron_left</mat-icon>
+        </button>
+
+        <button
+          class="report__button"
+          mat-raised-button
+          color="accent"
+          (click)="handleClick(true)"
+        >
+          <mat-icon>chevron_right</mat-icon>
+        </button>
+      </div>
     </div>
-  </div>
-  <div class="report__container">
-    <app-report-specific
-      [week]="weekNumber"
-      [year]="yearNumber"
-      [weekIso]="weekIsoFormat"
-    ></app-report-specific>
+    <div>
+      <div class="report__days">
+        <mat-card *ngFor="let day of weekMap">
+          <mat-card-content
+            >{{ day.dayname | slice : 0 : 3 }} {{ " - "
+            }}{{ day.day }}</mat-card-content
+          >
+        </mat-card>
+      </div>
+    </div>
+    <div class="report__specific">
+      <app-report-specific
+        [week]="weekNumber"
+        [year]="yearNumber"
+        [weekIso]="weekIsoFormat"
+      ></app-report-specific>
+    </div>
   </div>
 </section>

@@ -19,8 +19,6 @@
     display: flex;
     flex-direction: row;
     gap: 0.3rem;
-    overflow-x: scroll;
-    min-width: 49rem;
     justify-content: space-between;
   }
 
@@ -28,9 +26,12 @@
     max-width: 95vw;
     margin: 1rem 0;
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     gap: 0.3rem;
-    overflow-x: scroll;
+  }
+
+  &__specific {
+    max-width: 95vw;
   }
 
   &__button {
@@ -40,6 +41,8 @@
   &__days {
     display: flex;
     flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
   }
 
   .mat-mdc-card-title,
