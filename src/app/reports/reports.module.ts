@@ -14,6 +14,7 @@ import { ReportHttpService } from './services/report-http.service';
 import { ReportService } from './services/report.service';
 import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
+import { currentUserGuard } from '../shared/guards/current-user.guard';
 
 @NgModule({
   declarations: [
