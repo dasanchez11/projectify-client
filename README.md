@@ -1,27 +1,80 @@
+<p align="center">
+  <a href="https://angular.io/docs" target="__blank"><img src="https://upload.wikimedia.org/wikipedia/commons/c/cf/Angular_full_color_logo.svg" width="200" alt="Angular Logo" /></a>
+</p>
+
 # Projectify
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 14.1.3.
+#### \* This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 14.2.9.
 
-## Development server
+# Technologies used
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+<p align="left">
+  <a href="https://angular.io/docs" target="__blank"><img src="https://upload.wikimedia.org/wikipedia/commons/c/cf/Angular_full_color_logo.svg" width="100" alt="Angular Logo" /></a>
+</p>
 
-## Code scaffolding
+![Angular](https://img.shields.io/badge/angular-%23DD0031.svg?style=for-the-badge&logo=angular&logoColor=white)
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+![RxJS](https://img.shields.io/badge/rxjs-%23B7178C.svg?style=for-the-badge&logo=reactivex&logoColor=white)
 
-## Build
+![SASS](https://img.shields.io/badge/SASS-hotpink.svg?style=for-the-badge&logo=SASS&logoColor=white)
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+![Jasmine](https://img.shields.io/badge/jasmine-%238A4182.svg?style=for-the-badge&logo=jasmine&logoColor=white)
 
-## Running unit tests
+![TypeScript](https://img.shields.io/badge/typescript-%23007ACC.svg?style=for-the-badge&logo=typescript&logoColor=white)
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+![Netlify](https://img.shields.io/badge/netlify-%23000000.svg?style=for-the-badge&logo=netlify&logoColor=#00C7B7)
 
-## Running end-to-end tests
+# Code structure
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+```
+app/
+  ├── module/
+    ├── components/
+    ├── guards/
+    ├── models/
+    ├── services/
+    ├── tests (mock and utils for testing)/
 
-## Further help
+```
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+# Results
+
+## Deployed website
+
+<a href= 'https://taupe-cat-ed2fb6.netlify.app/projects' target="__blank">https://taupe-cat-ed2fb6.netlify.app/projects</a>
+
+## Tests
+
+- Testing Results:
+
+<p align="left">
+  <a target="__blank"><img src="./tests.jpg" width="600" /></a>
+</p>
+
+## App overview video
+
+<a href= 'https://drive.google.com/file/d/1vz8FQvslvEH11MCxxSQb9yeT1nLGcolC/view?usp=sharing' target="__blank">https://drive.google.com/file/d/1vz8FQvslvEH11MCxxSQb9yeT1nLGcolC/view?usp=sharing</a>
+
+# Clone Project and run it locally
+
+1. Make sure you got docker-desktop installed on your pc
+2. Clone the Repository
+
+```
+https://github.com/dasanchez11/the-mdb.git
+```
+
+3. Create a **.env** that has the same parameters as the **.env.example**
+4. Run the app on Docker
+
+```
+docker-compose up -d
+```
+
+5. Open the app on your web browser
+
+```
+http://localhost:4200/
+```
+
+6. Enjoy
