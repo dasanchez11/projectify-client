@@ -41,7 +41,7 @@ app/
 
 ## Deployed website
 
-<a href= 'https://taupe-cat-ed2fb6.netlify.app/projects' target="__blank">https://taupe-cat-ed2fb6.netlify.app/projects</a>
+<a href= 'https://taupe-cat-ed2fb6.netlify.app' target="__blank">https://taupe-cat-ed2fb6.netlify.app</a>
 
 ## Tests
 
@@ -64,7 +64,12 @@ app/
 https://github.com/dasanchez11/the-mdb.git
 ```
 
-3. Create a **.env** that has the same parameters as the **.env.example**
+3. Create a **.env** that has the same parameters as the **.env.example** and add environment variables
+
+```
+BASE_URL = 'http://localhost:3002'
+```
+
 4. Run the app on Docker
 
 ```
