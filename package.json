@@ -10,7 +10,6 @@
     "test": "ng test",
     "postinstall": "npm run config"
   },
-
   "private": true,
   "dependencies": {
     "@angular/animations": "^16.0.3",
@@ -25,6 +24,7 @@
     "colors": "^1.4.0",
     "dotenv": "^16.1.0",
     "rxjs": "~7.8.1",
+    "ts-node": "^10.9.1",
     "tslib": "^2.5.2",
     "zone.js": "~0.13.0"
   },
