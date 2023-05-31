@@ -3,23 +3,29 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
+    "config": "ts-node src/environments/set-env.ts",
     "start": "npm run config && ng serve --host 0.0.0.0",
     "build": "npm run config && ng build --configuration production",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "test": "ng test",
+    "postinstall": "npm run config"
   },
   "private": true,
   "dependencies": {
     "@angular/animations": "^16.0.3",
+    "@angular/cdk": "^16.0.2",
     "@angular/common": "^16.0.3",
     "@angular/compiler": "^16.0.3",
     "@angular/core": "^16.0.3",
     "@angular/forms": "^16.0.3",
-    "@angular/material": "^16.0.1",
+    "@angular/material": "^16.0.2",
     "@angular/platform-browser": "^16.0.3",
     "@angular/platform-browser-dynamic": "^16.0.3",
     "@angular/router": "^16.0.3",
+    "colors": "^1.4.0",
+    "dotenv": "^16.1.0",
     "rxjs": "~7.8.1",
+    "ts-node": "^10.9.1",
     "tslib": "^2.5.2",
     "zone.js": "~0.13.0"
   },

@@ -14,6 +14,7 @@ import { AuthService } from './services/auth.service';
 import { AuthHttpService } from './services/auth-http.service';
 import { SharedModule } from '../shared/shared.module';
 import { HttpClientModule } from '@angular/common/http';
+import { authGuard } from './guards/auth.guard';
 
 @NgModule({
   declarations: [LoginComponent, RegisterComponent],
@@ -30,6 +31,6 @@ import { HttpClientModule } from '@angular/common/http';
     SharedModule,
     HttpClientModule,
   ],
-  providers: [AuthService, AuthHttpService],
+  providers: [AuthService, AuthHttpService, authGuard],
 })
 export class AuthModule {}
