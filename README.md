@@ -53,7 +53,11 @@ app/
 
 ## App overview video
 
-<a href= 'https://drive.google.com/file/d/1vz8FQvslvEH11MCxxSQb9yeT1nLGcolC/view?usp=sharing' target="__blank">https://drive.google.com/file/d/1vz8FQvslvEH11MCxxSQb9yeT1nLGcolC/view?usp=sharing</a>
+<a href= 'https://www.loom.com/share/196225cf02b640d79df2de5634585a29' target="__blank">https://www.loom.com/share/196225cf02b640d79df2de5634585a29</a>
+
+## How to start the app locally
+
+<a href= 'https://www.loom.com/share/51181be5d69641b7a160e7cb26992ea2' target="__blank">https://www.loom.com/share/51181be5d69641b7a160e7cb26992ea2</a>
 
 # Clone Project and run it locally
 
